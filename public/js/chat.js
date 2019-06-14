@@ -9,12 +9,21 @@ var messages = document.getElementById("messages");
         })
         .then(json => {
             json.map(data => {
-                let li = document.createElement("li");
-                let span = document.createElement("span");
-                messages.appendChild(li).append(data.message);
+                console.log(data);
+                let tr = document.createElement("tr");
+                let td_fecha = document.createElement("td");
+                let td_persona = document.createElement("td");
+                let td_mensaje = document.createElement("td");
+                td_fecha.append(data.createdAt);
+                td_persona.append(data.sender);
+                td_mensaje.append(data.message);
+
+                tr.appendChild(td_fecha);
+                tr.appendChild(td_persona);
+                tr.appendChild(td_mensaje);
                 messages
-                    .appendChild(span)
-                    .append("by " + data.sender + ": " + formatTimeAgo(data.createdAt));
+                    .appendChild(tr);
             });
+            $('table').DataTable();
         });
 })();
